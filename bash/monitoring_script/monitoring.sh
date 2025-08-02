@@ -1,6 +1,9 @@
 #!/usr/bin/bash
 
 
+set -euo pipefail
+
+
 general_information(){
     echo "=== SERVER MONITORING ==="
     echo "Date: $(date)"
@@ -39,9 +42,21 @@ network_intrefaces_information(){
     echo ""
 }
 
+while true; do
+    general_information
+    sleep 1
+    cpu_information
+    sleep 1
+    memory_information
+    sleep 1
+    discs_information
+    sleep 1
+    network_intrefaces_information
+    sleep 1
+    read -p "Do you want to exit ? (y/n): " answer
+    if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
+        echo "Exit..."
+        break
+    fi
+done
 
-general_information
-cpu_information
-memory_information
-discs_information
-network_intrefaces_information
